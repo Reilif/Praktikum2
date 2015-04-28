@@ -1,0 +1,22 @@
+<link rel="import" href="../components/bower_components/polymer/polymer.html">
+<link rel="import" href="../components/bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="synonym-list" attributes="word">
+    <template>
+        <p>Synonyme zu {{word}}:</p>
+        <core-ajax url="https://www.openthesaurus.de/synonyme/search?q={{word}}&format=text/xml" auto
+                   response="{{resp}}" withCredentials=true handleAs="json"></core-ajax>
+        <div id="list">
+
+        </div>
+    </template>
+
+    <script>
+        SynonymList = Polymer({
+            respChanged = function(oldValue, newValue){
+                this.$.list.clear();
+                var synlist = JSON.parse(newValue);
+            }
+        });
+    </script>
+</polymer-element>

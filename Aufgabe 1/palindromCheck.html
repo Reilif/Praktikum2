@@ -1,0 +1,59 @@
+<template>
+    <style>
+        .right{
+            color: green;
+            font-weight: bold;
+        }
+
+        .false{
+            color: red;
+            text-decoration: line-through;
+        }
+
+    </style>
+
+    <content></content>
+    <p id = "tfOut"></p>
+
+</template>
+
+<script>
+    var thatDoc = document;
+    var thisDoc = (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+    var ChatFieldProto = Object.create(HTMLElement.prototype);
+
+    ChatFieldProto.createdCallback = function () {
+        // Erzeugt die ShadowRoot
+        var shadowRoot = this.createShadowRoot();
+        // Erzeugt einen Clone vom Template und hängt diesen an die ShadowRoot
+
+
+        var template = thisDoc.querySelector('template').content;
+
+        var clone = thatDoc.importNode(template, true);
+        shadowRoot.appendChild(clone);
+        // Holt sich ein Element
+        this.tfOut = shadowRoot.getElementById("tfOut");
+        this.tfOut.textContent = this.getPalindrom();
+
+
+        if(this.isPalindrom()){
+            this.tfOut.className = "right";
+        }else{
+            this.tfOut.className = "false";
+        }
+    };
+
+
+    ChatFieldProto.isPalindrom = function () {
+        var text = this.textContent.toLowerCase();
+        return text.split('').reverse().join('') == text;
+    };
+
+    ChatFieldProto.getPalindrom = function () {
+        return this.textContent.split('').reverse().join('');
+    };
+
+    var PalindromCheck = thisDoc.registerElement('palindrom-check', {prototype: ChatFieldProto});
+</script>
