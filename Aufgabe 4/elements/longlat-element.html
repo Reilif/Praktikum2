@@ -1,0 +1,34 @@
+<link rel="import" href="../components/bower_components/polymer/polymer.html">
+<link rel="import" href="../components/bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../components/bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../components/bower_components/paper-item/paper-item.html">
+
+<polymer-element name="longlat-element" attributes="long lat city">
+    <template>
+        <p>Die Koordinaten für <b>{{city}}</b> sind Long: {{long}} Lat: {{lat}}</p>
+        <core-ajax url="http://maps.googleapis.com/maps/api/geocode/json?address={{city}}" auto
+                   response="{{resp}}" handleAs="json"> </core-ajax>
+    </template>
+
+    <script>
+        SynonymList = Polymer({
+            ready: function(){
+                this.city = this.textContent;
+            },
+            attributeChanged: function(){
+                this.city = this.textContent;
+            },
+            respChanged:function(oldValue, newValue){
+                console.log(newValue);
+                if(newValue && newValue.status == "OK"){
+                    if(newValue.results.length > 0){
+                        var location = newValue.results[0].geometry.location;
+                        this.long = location.lng;
+                        this.lat = location.lat;
+                    }
+                }
+            }
+
+        });
+    </script>
+</polymer-element>

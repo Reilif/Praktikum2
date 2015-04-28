@@ -1,0 +1,51 @@
+<link rel="import" href="../components/bower_components/polymer/polymer.html">
+
+<polymer-element name="palindrom-check" attributes="input">
+    <template>
+        <style>
+            .right {
+                color: green;
+                font-weight: bold;
+            }
+
+            .false {
+                color: red;
+                text-decoration: line-through;
+            }
+
+        </style>
+
+        <p id = "tfIn">{{input}}</p>
+        <p id="tfOut" class={{styleClass}}>{{palindrom}}</p>
+    </template>
+
+    <script>
+
+        PalindromCheck = Polymer({
+                    input:"",
+                    palindrom:"",
+                    styleClass:"",
+                    domReady: function(){
+                        this.input = this.textContent;
+                    },
+                    isPalindrom: function(){
+                        var text = this.input.toLowerCase();
+                        return this.getPalindrom().toLowerCase() == text;
+                    },
+                    getPalindrom: function(){
+                        return this.input.split('').reverse().join('');
+                    },inputChanged: function(){
+                        if(this.isPalindrom()){
+                            this.styleClass = "right";
+                        }else{
+                            this.styleClass = "false";
+                        }
+
+                        this.palindrom = this.getPalindrom();
+                    }
+                }
+
+        );
+    </script>
+
+</polymer-element>

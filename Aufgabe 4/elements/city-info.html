@@ -1,0 +1,18 @@
+<link rel="import" href="../components/bower_components/polymer/polymer.html">
+<link rel="import" href="../components/bower_components/paper-input/paper-input.html">
+<link rel="import" href="longlat-element.html">
+<link rel="import" href="static-map.html">
+<link rel="import" href="weather-element.html">
+<link rel="import" href="palindrom-check.html">
+<link rel="import" href="synonym-list.html">
+
++<polymer-element name="city-info" attributes="long lat city" noscript>
+    <template>
+       <paper-input label="Welche Stadt?" floatingLabel value={{city}}></paper-input>
+        <longlat-element lat="{{lat}}" long="{{long}}" city="{{city}}"></longlat-element>
+        <static-map lat="{{lat}}" long="{{long}}" zoom="12" width="400" height="400"></static-map>
+        <weather-element lat="{{lat}}" long="{{long}}"></weather-element>
+        <palindrom-check input="{{city}}"></palindrom-check>
+        <synonym-list word="{{city}}"></synonym-list>
+    </template>
+</polymer-element>

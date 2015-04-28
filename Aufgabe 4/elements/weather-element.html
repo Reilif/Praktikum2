@@ -1,0 +1,48 @@
+<link rel="import" href="../components/bower_components/polymer/polymer.html">
+<link rel="import" href="../components/bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../components/bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../components/bower_components/paper-item/paper-item.html">
+<link rel="import" href="../components/bower_components/core-icon/core-icon.html">
+
+<polymer-element name="weather-element" attributes="long lat">
+    <template>
+        <core-ajax url="http://api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{long}}&lang=de" auto
+                   response="{{resp}}" handleAs="json"></core-ajax>
+
+        <paper-shadow>
+
+            <core-icon src="http://openweathermap.org/img/w/{{icon}}.png" alt="Keine Wetterdaten" style="width: 50px; height: 50px"></core-icon>
+
+            <p>{{descrip}}</p>
+
+            <p>Temperatur: {{temp}} °C</p>
+
+            <p>Luftdruck: {{pressure}} hPa</p>
+
+            <p>Luftfeuchtigkeit: {{humidity}} % </p>
+        </paper-shadow>
+    </template>
+
+    <script>
+        SynonymList = Polymer({
+            temp: "0",
+            pressure: "0",
+            humidity: "0",
+            descrip: "",
+            icon:"",
+            respChanged: function (oldValue, newValue) {
+                console.log(newValue);
+
+                if (newValue) {
+                    this.descrip = newValue.weather[0].description;
+                    this.icon = newValue.weather[0].icon;
+                    this.temp = Math.round((newValue.main.temp - 273.15) * 100) / 100;
+                    this.pressure = newValue.main.pressure;
+                    this.humidity = newValue.main.humidity;
+                }
+            }
+
+        })
+        ;
+    </script>
+</polymer-element>

@@ -1,0 +1,10 @@
+<link rel="import" href="../components/bower_components/polymer/polymer.html">
+<link rel="import" href="../components/bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../components/bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../components/bower_components/core-image/core-image.html">
+
+<polymer-element name="static-map" attributes="long lat zoom width height" noscript>
+    <template>
+        <core-image src="http://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{long}}&zoom={{zoom}}&size={{height}}x{{width}}" preload></core-image>
+    </template>
+</polymer-element>
