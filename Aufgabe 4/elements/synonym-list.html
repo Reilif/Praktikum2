@@ -5,33 +5,33 @@
 
 <polymer-element name="synonym-list" attributes="word">
     <template>
-        <p>Synonyme zu {{word}}:</p>
-        <core-ajax url="https://www.openthesaurus.de/synonyme/search?q={{word}}&format=application/json" auto
-                   response="{{resp}}" withCredentials=true handleAs="json"></core-ajax>
-        <paper-shadow id="list">
-
+        <paper-shadow layout vertical center>
+            <h2>Synonyme zu {{word}}:</h2>
+            <core-ajax url="https://www.openthesaurus.de/synonyme/search?q={{word}}&format=application/json" auto
+                       response="{{resp}}" withCredentials=true handleAs="json"></core-ajax>
+            <paper-shadow id="list">
+            </paper-shadow>
         </paper-shadow>
     </template>
 
     <script>
         SynonymList = Polymer({
-            respChanged:function(oldValue, newValue){
+            respChanged: function (oldValue, newValue) {
 
-                while(this.$.list.firstChild){
+                while (this.$.list.firstChild) {
                     this.$.list.removeChild(this.$.list.firstChild);
                 }
 
-                if(newValue === null){
-                }else{
+                if (newValue && newValue.synsets && newValue.synsets.length > 0) {
                     var terms = newValue.synsets[0].terms;
 
-                    for (var i = 0; i< terms.length; i++){
+                    for (var i = 0; i < terms.length; i++) {
                         var term = terms[i];
                         this.addItem(term.term);
                     }
                 }
 
-            }, addItem : function(text){
+            }, addItem: function (text) {
                 var newChild = document.createElement("paper-item");
                 newChild.textContent = text;
                 this.$.list.appendChild(newChild);

@@ -9,16 +9,14 @@
         <core-ajax url="http://api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{long}}&lang=de" auto
                    response="{{resp}}" handleAs="json"></core-ajax>
 
-        <paper-shadow>
-
-            <core-icon src="http://openweathermap.org/img/w/{{icon}}.png" alt="Keine Wetterdaten" style="width: 50px; height: 50px"></core-icon>
-
-            <p>{{descrip}}</p>
-
+        <paper-shadow layout vertical center>
+            <h2>Wetter</h2>
+            <div layout horizontal>
+                <core-icon src="http://openweathermap.org/img/w/{{icon}}.png" alt="Keine Wetterdaten" style="width: 50px; height: 50px"></core-icon>
+                <p flex>{{descrip}}</p>
+            </div>
             <p>Temperatur: {{temp}} °C</p>
-
             <p>Luftdruck: {{pressure}} hPa</p>
-
             <p>Luftfeuchtigkeit: {{humidity}} % </p>
         </paper-shadow>
     </template>

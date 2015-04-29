@@ -6,13 +6,53 @@
 <link rel="import" href="palindrom-check.html">
 <link rel="import" href="synonym-list.html">
 
-+<polymer-element name="city-info" attributes="long lat city" noscript>
++
+<polymer-element name="city-info" attributes="long lat city" noscript>
     <template>
-       <paper-input label="Welche Stadt?" floatingLabel value={{city}}></paper-input>
-        <longlat-element lat="{{lat}}" long="{{long}}" city="{{city}}"></longlat-element>
-        <static-map lat="{{lat}}" long="{{long}}" zoom="12" width="400" height="400"></static-map>
-        <weather-element lat="{{lat}}" long="{{long}}"></weather-element>
-        <palindrom-check input="{{city}}"></palindrom-check>
-        <synonym-list word="{{city}}"></synonym-list>
+
+        <style>
+            longlat-element /deep/ p {
+                width: 100%;
+                background-color: #526E9C;
+                color: white;
+            }
+
+            weather-element /deep/ p {
+                color: white;
+            }
+
+            div {
+                padding: 5px;
+                background-color: #526E9C;
+                border-radius: 5px;
+            }
+
+            :host /deep/ paper-shadow{
+                background-color: mediumpurple;
+                margin: 5px;
+                border-radius: 10px;
+            }
+
+            :host /deep/ h2{
+                color: white;
+
+            }
+
+            :host /deep/ paper-shadow /deep/ paper-shadow{
+                background-color: mediumvioletred;
+            }
+
+        </style>
+        <div vertical layout style="margin: 5px">
+            <longlat-element lat="{{lat}}" long="{{long}}" city="{{city}}"></longlat-element>
+            <div horizontal justified layout>
+                <static-map lat="{{lat}}" long="{{long}}" zoom="12" width="400" height="400" flex></static-map>
+                <weather-element lat="{{lat}}" long="{{long}}" flex></weather-element>
+            </div>
+            <div horizontal justified layout>
+                <palindrom-check input="{{city}}" flex></palindrom-check>
+                <synonym-list word="{{city}}" flex></synonym-list>
+            </div>
+        </div>
     </template>
 </polymer-element>

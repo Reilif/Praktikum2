@@ -1,4 +1,5 @@
 <link rel="import" href="../components/bower_components/polymer/polymer.html">
+<link rel="import" href="../components/bower_components/paper-shadow/paper-shadow.html">
 
 <polymer-element name="palindrom-check" attributes="input">
     <template>
@@ -15,36 +16,38 @@
 
         </style>
 
-        <p id = "tfIn">{{input}}</p>
-        <p id="tfOut" class={{styleClass}}>{{palindrom}}</p>
+        <paper-shadow layout vertical center>
+            <h2>Ist {{input}} ein Palindrom?</h2>
+            <p id="tfIn">{{input}}</p>
+            <p id="tfOut" class={{styleClass}}>{{palindrom}}</p>
+        </paper-shadow>
     </template>
 
     <script>
 
         PalindromCheck = Polymer({
-                    input:"",
-                    palindrom:"",
-                    styleClass:"",
-                    domReady: function(){
+                    input: "",
+                    palindrom: "",
+                    styleClass: "",
+                    domReady: function () {
                         this.input = this.textContent;
                     },
-                    isPalindrom: function(){
+                    isPalindrom: function () {
                         var text = this.input.toLowerCase();
                         return this.getPalindrom().toLowerCase() == text;
                     },
-                    getPalindrom: function(){
+                    getPalindrom: function () {
                         return this.input.split('').reverse().join('');
-                    },inputChanged: function(){
-                        if(this.isPalindrom()){
+                    }, inputChanged: function () {
+                        if (this.isPalindrom()) {
                             this.styleClass = "right";
-                        }else{
+                        } else {
                             this.styleClass = "false";
                         }
 
                         this.palindrom = this.getPalindrom();
                     }
                 }
-
         );
     </script>
 

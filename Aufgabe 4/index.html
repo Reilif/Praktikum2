@@ -5,13 +5,58 @@
     <title></title>
     <link rel="import" href="components/bower_components/polymer/polymer.html">
     <link rel="import" href="components/bower_components/paper-elements/paper-elements.html">
-    <link href="elements/longlat-element.html" rel="import" />
-    <link href="elements/static-map.html" rel="import" />
-    <link href="elements/city-info.html" rel="import" />
-    <link href="elements/weather-element.html" rel="import" />
+    <link href="elements/longlat-element.html" rel="import"/>
+    <link href="elements/static-map.html" rel="import"/>
+    <link href="elements/city-info.html" rel="import"/>
+    <link href="elements/weather-element.html" rel="import"/>
+
+    <link rel="import"
+          href="components/bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import"
+          href="components/bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import"
+          href="components/bower_components/core-icons/core-icons.html">
+    <link rel="import"
+          href="components/bower_components/paper-icon-button/paper-icon-button.html">
+
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
 
 </head>
-<body>
-<city-info></city-info>
+
+<body fullbleed vertical layout unresolved>
+
+<polymer-element name="test-page" noscript>
+    <template>
+        <style>
+            :host{
+                background-color: #F5FFFA;
+            }
+
+            #header{
+                background-color: #ff4080;
+                padding: 10px;
+                color: white;
+            }
+
+            city-info{
+                margin: 10px;
+            }
+        </style>
+
+        <div layout horizontal center id="header">
+            <h1 flex>Infos zur City {{city}}</h1>
+            <core-icon icon="search"></core-icon>
+            <paper-input label="Welche Stadt?" floatingLabel value={{city}}></paper-input>
+        </div>
+        <city-info city="{{city}}"></city-info>
+    </template>
+</polymer-element>
+<test-page>
+
+</test-page>
 </body>
 </html>

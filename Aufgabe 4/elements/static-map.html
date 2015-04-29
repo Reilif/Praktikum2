@@ -5,6 +5,9 @@
 
 <polymer-element name="static-map" attributes="long lat zoom width height" noscript>
     <template>
-        <core-image src="http://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{long}}&zoom={{zoom}}&size={{height}}x{{width}}" preload></core-image>
+        <paper-shadow layout vertical center>
+            <h2>Karte</h2>
+            <core-image src="http://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{long}}&zoom={{zoom}}&size={{height}}x{{width}}" preload></core-image>
+        </paper-shadow>
     </template>
 </polymer-element>
